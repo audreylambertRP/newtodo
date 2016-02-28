@@ -18,7 +18,7 @@ export default class App extends React.Component {
     this.newTodo = e.target.value
   }
 
-  addTodo() {
+  addTodo(e) {
    this.setState({
      todos: this.state.todos.concat({id: this.idCounter++, text: this.newTodo})
    })
@@ -30,14 +30,6 @@ export default class App extends React.Component {
         return i !== index
       })
     })       
-  }
-
-  deleteTodoClosure(i) {
-    return () => {
-      this.setState({
-        todos: this.state.todos.filter((elem, index) => index !== i)
-      })
-    }
   }
 
   render() {
@@ -54,7 +46,6 @@ export default class App extends React.Component {
               return <div key={value.id}>
                         <li>{index + 1} : {value.text}</li>
                         <button type='button' onClick={this.deleteTodo.bind(this, index)}>Delete todo</button>
-                        <button type='button' onClick={this.deleteTodoClosure.bind(this)(index)}>Delete todo</button>
                      </div>
             }.bind(this))
           }
